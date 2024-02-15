@@ -4,6 +4,9 @@ import com.mjc.school.controller.BaseRestController;
 import com.mjc.school.service.NewsService;
 import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +22,16 @@ public class NewsController implements BaseRestController<NewsDtoRequest, NewsDt
 
     public final NewsService service;
 
-
     @Override
     @GetMapping
+    @ApiOperation(value = "View all news", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved all news"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+            @ApiResponse(code = 500, message = "Application failed to process the request")
+    })
     public ResponseEntity<List<NewsDtoResponse>> readAllByPage(
             @Min(1)
             @RequestParam int page,
