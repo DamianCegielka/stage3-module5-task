@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(':module-service')
+    implementation project(path: ':module-repository')
+    implementation 'org.modelmapper:modelmapper:3.1.1'
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    implementation 'net.sunshow.nxcloud:nxcloud-springmvc-automapping:0.3.6'
+    annotationProcessor 'org.modelmapper:modelmapper:3.1.0'
+}
