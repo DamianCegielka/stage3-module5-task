@@ -1,10 +1,15 @@
 package com.mjc.school.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tags")
 @Data
@@ -15,6 +20,7 @@ public class TagModel implements BaseEntity<Long> {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @Length(min=3, max=15)
     private String name;
 
     @ManyToMany(mappedBy = "tagModels", fetch = FetchType.LAZY)

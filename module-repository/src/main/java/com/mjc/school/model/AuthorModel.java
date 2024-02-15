@@ -1,14 +1,17 @@
 package com.mjc.school.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "author")
 @Data
@@ -19,6 +22,7 @@ public class AuthorModel implements BaseEntity<Long> {
     private Long id;
 
     @Column(nullable = false, length = 15, unique = true)
+    @Length(min = 3, max = 15)
     private String name;
 
     @Column(nullable = false)

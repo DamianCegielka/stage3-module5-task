@@ -1,6 +1,9 @@
 package com.mjc.school.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -8,6 +11,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "news")
 @Data
@@ -18,9 +23,11 @@ public class NewsModel implements BaseEntity<Long> {
     private Long id;
 
     @Column(nullable = false, length = 30)
+    @Length(min = 5, max = 30)
     private String title;
 
     @Column(nullable = false)
+    @Length(min = 5, max = 255)
     private String content;
 
     @Column(nullable = false)
