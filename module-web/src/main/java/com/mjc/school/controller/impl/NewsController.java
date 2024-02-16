@@ -16,7 +16,7 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/news", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@RequestMapping(value = "api/v1/news", consumes = {"application/JSON"}, produces = {"application/JSON"})
 @AllArgsConstructor
 public class NewsController implements BaseRestController<NewsDtoRequest, NewsDtoResponse, Long> {
 
