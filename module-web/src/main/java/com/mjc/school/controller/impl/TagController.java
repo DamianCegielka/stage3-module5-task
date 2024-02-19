@@ -5,6 +5,7 @@ import com.mjc.school.controller.BaseRestController;
 import com.mjc.school.service.TagService;
 import com.mjc.school.service.dto.tag.TagDtoRequest;
 import com.mjc.school.service.dto.tag.TagDtoResponse;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,8 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/tag", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@RequestMapping(value = "/api/v1/tag", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@Api(produces = "application/json", value = "Operations for creating, updating, retrieving and deleting tags in the application")
 @AllArgsConstructor
 public class TagController implements BaseRestController<TagDtoRequest, TagDtoResponse, Long> {
 

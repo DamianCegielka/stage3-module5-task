@@ -4,6 +4,7 @@ import com.mjc.school.controller.BaseRestController;
 import com.mjc.school.service.CommentService;
 import com.mjc.school.service.dto.comment.CommentDtoRequest;
 import com.mjc.school.service.dto.comment.CommentDtoResponse;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,8 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/comment", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@RequestMapping(value = "/api/v1/comment", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@Api(produces = "application/json", value = "Operations for creating, updating, retrieving and deleting comments in the application")
 @AllArgsConstructor
 public class CommentController implements BaseRestController<CommentDtoRequest, CommentDtoResponse, Long> {
 

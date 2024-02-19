@@ -4,6 +4,7 @@ import com.mjc.school.controller.BaseRestController;
 import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,8 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/authors", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@RequestMapping(value = "/api/v1/authors", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@Api(produces = "application/json", value = "Operations for creating, updating, retrieving and deleting authors in the application")
 @AllArgsConstructor
 public class AuthorController implements BaseRestController<AuthorDtoRequest, AuthorDtoResponse, Long> {
 

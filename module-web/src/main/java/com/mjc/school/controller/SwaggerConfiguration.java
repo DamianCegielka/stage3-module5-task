@@ -15,14 +15,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com/mjc/school/controller/impl/NewsController.java"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(apiEndPointInfo());
     }
-    public ApiInfo apiEndPointInfo(){
+
+    public ApiInfo apiEndPointInfo() {
         return new ApiInfoBuilder().title("Application Rest API")
                 .description("News Application API")
                 .contact(new Contact("MJC Supervisor", "mjc/finalexam", "mjc@epam.com"))
