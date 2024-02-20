@@ -10,17 +10,20 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/tag", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@RequestMapping(value = "/api/v1/tag", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(produces = "application/json", value = "Operations for creating, updating, retrieving and deleting tags in the application")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TagController implements BaseRestController<TagDtoRequest, TagDtoResponse, Long> {
 
     public final TagService service;
@@ -40,7 +43,8 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
             @RequestParam int page,
             @RequestParam(required = false, defaultValue = "5") int size,
             @RequestParam(name = "sort_by", required = false, defaultValue = "name::asc") String sortBy) {
-        return new ResponseEntity<>(service.readAllPagedAndSorted(page, size, sortBy), HttpStatus.valueOf(200));
+
+        return new ResponseEntity<>(service.readAllPagedAndSorted(page, size, sortBy), HttpStatus.OK);
     }
 
     @Override
@@ -54,13 +58,16 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
             @ApiResponse(code = 500, message = "Application failed to process the request")
     }
     )
-    public ResponseEntity<TagDtoResponse> readById(@PathVariable Long id) {
-        return new ResponseEntity<>(service.readById(id), HttpStatus.valueOf(200));
+    public ResponseEntity<TagDtoResponse> readById(@Valid @PathVariable Long id) {
+        return new ResponseEntity<>(service.readById(id), HttpStatus.OK);
     }
+
+
 
     @Override
     @PostMapping("/create")
     @ApiOperation(value = "Create a piece of tag", response = TagDtoResponse.class)
+
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successfully created a piece of tag"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -68,9 +75,10 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 500, message = "Application failed to process the request")
     })
-    public ResponseEntity<TagDtoResponse> create(@RequestBody TagDtoRequest createRequest) {
+    public ResponseEntity<TagDtoResponse> create(@Valid @RequestBody TagDtoRequest createRequest) {
         return new ResponseEntity<>(service.create(createRequest), HttpStatus.CREATED);
     }
+
 
     @Override
     @PutMapping("/update/{id}")
@@ -84,8 +92,9 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
     }
     )
     public ResponseEntity<TagDtoResponse> update(@PathVariable Long id,
+                                                 @Valid
                                                  @RequestBody TagDtoRequest updateRequest) {
-        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.OK);
     }
 
     @Override

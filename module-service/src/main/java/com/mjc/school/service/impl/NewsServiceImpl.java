@@ -86,8 +86,8 @@ public class NewsServiceImpl implements NewsService {
                     .map(repository::findAllByTagModelName)
                     .forEach(searchResult::addAll);
         }
-        if (!newsDtoRequest.getTagIds().isBlank()) {
-            Arrays.stream(newsDtoRequest.getTagIds().split(","))
+        if (!newsDtoRequest.getTagId().isBlank()) {
+            Arrays.stream(newsDtoRequest.getTagId().split(","))
                     .map(s -> repository.findAllByTagModelId(Long.valueOf(s)))
                     .forEach(searchResult::addAll);
         }

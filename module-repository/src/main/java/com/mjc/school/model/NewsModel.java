@@ -1,14 +1,13 @@
 package com.mjc.school.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,6 +15,8 @@ import java.util.List;
 @Entity
 @Table(name = "news")
 @Data
+@ToString(exclude = {"tagModels", "authorModel" , "commentModelList"})
+@EqualsAndHashCode(exclude = {"id", "tagModels", "commentModelList"})
 public class NewsModel implements BaseEntity<Long> {
 
     @Id
@@ -42,6 +43,9 @@ public class NewsModel implements BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "authorId", insertable = false, updatable = false)
     private AuthorModel authorModel;
+
+    @OneToMany(mappedBy = "newsModel")
+    private List<CommentModel> commentModelList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "news_tag",

@@ -1,11 +1,10 @@
 package com.mjc.school.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -13,10 +12,12 @@ import java.util.List;
 @Entity
 @Table(name = "tags")
 @Data
+@ToString(exclude = "newsModels")
+@EqualsAndHashCode(exclude = {"id","newsModels"})
 public class TagModel implements BaseEntity<Long> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -24,7 +25,7 @@ public class TagModel implements BaseEntity<Long> {
     private String name;
 
     @ManyToMany(mappedBy = "tagModels", fetch = FetchType.LAZY)
-    private List<NewsModel> newsModels;
+    private List<NewsModel> newsModels=new ArrayList<>();
 
     @Override
     public Long getId() {

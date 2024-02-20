@@ -6,6 +6,7 @@ import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
+import com.mjc.school.service.exception.AuthorIdDoesNotExistException;
 import com.mjc.school.service.exception.NewsDoesNotExistException;
 import com.mjc.school.service.mapper.AuthorDtoRequestMapperToAuthorModel;
 import com.mjc.school.service.mapper.AuthorModelMapperToAuthorDtoResponse;
@@ -37,7 +38,7 @@ public class AuthorServiceImpl implements AuthorService {
         return mapAuthorModelToAuthorDtoResponse
                 .map(repository
                         .findById(id)
-                        .orElseThrow(() -> new NewsDoesNotExistException(id)));
+                        .orElseThrow(() -> new AuthorIdDoesNotExistException(id)));
     }
 
     @Override

@@ -125,7 +125,7 @@ public class ModelDtoMapper {
         @Override
         public TagDtoResponse tagModelToDto(TagModel tagModel) {
             TagDtoResponse tagDtoResponse=new TagDtoResponse();
-            tagDtoResponse.setId(tagDtoResponse.getId());
+            tagDtoResponse.setId(tagModel.getId());
             tagDtoResponse.setName(tagModel.getName());
             return tagDtoResponse;
         }
@@ -133,8 +133,8 @@ public class ModelDtoMapper {
         @Override
         public TagModel tagDtoToModel(TagDtoRequest tagDtoRequest) {
             TagModel tagModel=new TagModel();
-            tagModel.setId(tagModel.getId());
-            tagModel.setName(tagModel.getName());
+            tagModel.setId(tagDtoRequest.getId());
+            tagModel.setName(tagDtoRequest.getName());
             return tagModel;
         }
     }

@@ -9,7 +9,7 @@ public class NewsDtoRequest {
     private String title;
     private String content;
     private Long authorId;
-    private String tagIds;
+    private String tagId;
     private String tagNames;
     private String authorName;
 

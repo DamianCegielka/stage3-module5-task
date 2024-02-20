@@ -1,8 +1,6 @@
 package com.mjc.school.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -15,6 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "author")
 @Data
+@ToString(exclude = "newsList")
+@EqualsAndHashCode(exclude = "id")
 public class AuthorModel implements BaseEntity<Long> {
 
     @Id

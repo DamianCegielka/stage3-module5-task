@@ -5,9 +5,11 @@ import com.mjc.school.repository.TagRepository;
 import com.mjc.school.service.TagService;
 import com.mjc.school.service.dto.tag.TagDtoRequest;
 import com.mjc.school.service.dto.tag.TagDtoResponse;
+import com.mjc.school.service.exception.NewsDoesNotExistException;
 import com.mjc.school.service.exception.TagIsDoesNotExistException;
 import com.mjc.school.service.mapper.TagMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class TagServiceImpl implements TagService {
 
     private final TagRepository repository;
+    @Autowired
     private final TagMapper tagMapper;
 
     @Override
@@ -31,13 +34,10 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public TagDtoResponse readById(Long id) {
+        TagModel tagModel = repository.findById(id)
+                .orElseThrow(TagIsDoesNotExistException::new);
 
-        Optional<TagModel> tagModel = repository.findById(id);
-        if (tagModel.isPresent()) {
-            return TagMapper.INSTANCE.tagModelToDto(tagModel.get());
-        } else {
-            throw new TagIsDoesNotExistException();
-        }
+        return tagMapper.tagModelToDto(tagModel);
     }
 
     @Override

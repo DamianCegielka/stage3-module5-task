@@ -1,6 +1,7 @@
 package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseRestController;
+import com.mjc.school.model.CommentModel;
 import com.mjc.school.service.CommentService;
 import com.mjc.school.service.dto.comment.CommentDtoRequest;
 import com.mjc.school.service.dto.comment.CommentDtoResponse;
@@ -8,8 +9,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +19,9 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/comment", consumes = {"application/JSON"}, produces = {"application/JSON"})
+@RequestMapping(value = "/api/v1/comment", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(produces = "application/json", value = "Operations for creating, updating, retrieving and deleting comments in the application")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CommentController implements BaseRestController<CommentDtoRequest, CommentDtoResponse, Long> {
 
     public final CommentService service;
@@ -37,7 +39,7 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
     public ResponseEntity<List<CommentDtoResponse>> readAllByPage
             (@Min(1) @RequestParam int page,
              @RequestParam(required = false, defaultValue = "5") int size,
-             @RequestParam(name = "sort_by", required = false, defaultValue = "name::asc") String sortBy) {
+             @RequestParam(name = "sort_by", required = false, defaultValue = "content::asc") String sortBy) {
         return new ResponseEntity<>(service.readAllPagedAndSorted(page, size, sortBy), HttpStatus.OK);
     }
 

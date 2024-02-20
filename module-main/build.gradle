@@ -14,27 +14,3 @@ dependencies {
 run {
     standardInput = System.in
 }
-
-
-
-/*plugins {
-    id 'application'
-}
-
-mainClassName = 'com.mjc.school.Main'
-
-dependencies {
-    implementation project(':module-web')
-    implementation project(path: ':module-web')
-    implementation project(path: ':module-repository')
-    implementation project(path: ':module-service')
-    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-    annotationProcessor 'org.modelmapper:modelmapper:3.1.0'
-}
-
-run {
-    standardInput = System.in
-}
-
-
- */
