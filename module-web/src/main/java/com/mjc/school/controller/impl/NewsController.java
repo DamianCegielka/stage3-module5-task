@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value ="/api/v1/news",consumes = {"application/JSON"}, produces = {"application/JSON"})
+@RequestMapping(value = "/api/v1/news", consumes = {"application/JSON"}, produces = {"application/JSON"})
 @Api(produces = "application/json", value = "Operations for creating, updating, retrieving and deleting news in the application")
 public class NewsController implements BaseRestController<NewsDtoRequest, NewsDtoResponse, Long> {
 
@@ -63,13 +62,29 @@ public class NewsController implements BaseRestController<NewsDtoRequest, NewsDt
 
     @Override
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "Create a piece of news", response = NewsDtoResponse.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully created a piece of news"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+            @ApiResponse(code = 500, message = "Application failed to process the request")
+    })
     public ResponseEntity<NewsDtoResponse> create(@RequestBody NewsDtoRequest createRequest) {
         return new ResponseEntity<>(service.create(createRequest), HttpStatus.CREATED);
     }
 
     @Override
     @PutMapping("/update/{id}")
+    @ApiOperation(value = "Update a piece of news information", response = NewsDtoResponse.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated news information"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+            @ApiResponse(code = 500, message = "Application failed to process the request")
+    }
+    )
     public ResponseEntity<NewsDtoResponse> update(@PathVariable Long id,
                                                   @RequestBody NewsDtoRequest updateRequest) {
         return new ResponseEntity<>(service.update(updateRequest), HttpStatus.valueOf(200));
@@ -77,7 +92,15 @@ public class NewsController implements BaseRestController<NewsDtoRequest, NewsDt
 
     @Override
     @DeleteMapping("/delete/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation(value = "Deletes specific news with the supplied id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully deletes the specific news"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+            @ApiResponse(code = 500, message = "Application failed to process the request")
+    }
+    )
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
     }
