@@ -12,3 +12,4 @@ public interface AuthorRepository extends JpaRepository<AuthorModel, Long> {
     @Query("SELECT a FROM AuthorModel a JOIN a.newsList n WHERE n.id = :newsId")
     AuthorModel findAllByNewsModelId(@Param("newsId") Long newsId);
     }
+

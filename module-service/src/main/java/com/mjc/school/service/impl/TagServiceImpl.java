@@ -22,7 +22,6 @@ import java.util.Optional;
 public class TagServiceImpl implements TagService {
 
     private final TagRepository repository;
-    @Autowired
     private final TagMapper tagMapper;
 
     @Override

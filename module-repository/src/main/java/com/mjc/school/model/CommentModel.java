@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "comment")
+//@Table(name = "COMMENT")
 @Data
 @ToString(exclude = {"newsModel"})
 @EqualsAndHashCode(exclude = {"id"})
@@ -18,14 +18,15 @@ public class CommentModel implements BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @NonNull
+    //@Column(nullable = false)
     @Length(min = 3, max = 255)
     private String content;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private LocalDateTime created;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private LocalDateTime modified;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
@@ -42,3 +43,24 @@ public class CommentModel implements BaseEntity<Long> {
         this.id = id;
     }
 }
+/*
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@ToString(exclude = {"newsModel"})
+@EqualsAndHashCode(exclude = {"id"})
+public class CommentModel implements  BaseEntity<Long>{
+		@Id
+		@GeneratedValue(strategy = GenerationType.AUTO)
+		private Long id;
+		@NonNull
+		private String content;
+		private LocalDateTime created;
+		private LocalDateTime modified;
+		@ManyToOne(cascade={CascadeType.MERGE})
+		@JoinColumn(name = "NEWS_ID", referencedColumnName = "id")
+		private NewsModel newsModel;
+
+}
+ */

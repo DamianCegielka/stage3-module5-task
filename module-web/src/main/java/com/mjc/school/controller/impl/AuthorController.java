@@ -68,7 +68,7 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
             @ApiResponse(code = 500, message = "Application failed to process the request")
     })
     public ResponseEntity<AuthorDtoResponse> create(@RequestBody AuthorDtoRequest createRequest) {
-        return new ResponseEntity<>(service.create(createRequest), HttpStatus.valueOf(201));
+        return new ResponseEntity<>(service.create(createRequest), HttpStatus.OK);
     }
 
     @Override

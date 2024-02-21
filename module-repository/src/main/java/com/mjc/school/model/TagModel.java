@@ -10,10 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tags")
+//@Table(name = "TAGS")
 @Data
 @ToString(exclude = "newsModels")
-@EqualsAndHashCode(exclude = {"id","newsModels"})
+@EqualsAndHashCode(exclude = {"id", "newsModels"})
 public class TagModel implements BaseEntity<Long> {
 
     @Id
@@ -22,10 +22,11 @@ public class TagModel implements BaseEntity<Long> {
 
     @Column(nullable = false, unique = true)
     @Length(min=3, max=15)
+    @NonNull
     private String name;
 
-    @ManyToMany(mappedBy = "tagModels", fetch = FetchType.LAZY)
-    private List<NewsModel> newsModels=new ArrayList<>();
+    @ManyToMany(mappedBy = "tagModels", cascade = {CascadeType.MERGE})
+    private List<NewsModel> newsModels = new ArrayList<>();
 
     @Override
     public Long getId() {

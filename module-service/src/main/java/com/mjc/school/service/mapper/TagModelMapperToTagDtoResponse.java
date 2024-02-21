@@ -5,8 +5,7 @@ import com.mjc.school.service.dto.tag.TagDtoResponse;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-@Mapper
-@Component
+
 public interface TagModelMapperToTagDtoResponse {
     TagDtoResponse tagModelToDto(TagModel tagModel);
 }

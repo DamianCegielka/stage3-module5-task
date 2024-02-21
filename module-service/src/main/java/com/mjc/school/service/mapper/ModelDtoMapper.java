@@ -12,9 +12,10 @@ import com.mjc.school.service.dto.news.NewsDtoRequest;
 import com.mjc.school.service.dto.news.NewsDtoResponse;
 import com.mjc.school.service.dto.tag.TagDtoRequest;
 import com.mjc.school.service.dto.tag.TagDtoResponse;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 
 public class ModelDtoMapper {
@@ -30,6 +31,8 @@ public class ModelDtoMapper {
             AuthorModel authorModel = new AuthorModel();
             authorModel.setId(request.getId());
             authorModel.setName(request.getName());
+            authorModel.setCreateDate(LocalDateTime.now());
+            authorModel.setLastUpdateTime(LocalDateTime.now());
             return authorModel;
         }
     }
@@ -56,7 +59,8 @@ public class ModelDtoMapper {
             NewsModel newsModel = new NewsModel();
             newsModel.setTitle(request.getTitle());
             newsModel.setContent(request.getContent());
-            newsModel.setAuthorId(request.getAuthorId());
+            newsModel.setCreateDate(LocalDateTime.now());
+            newsModel.setLastUpdateTime(LocalDateTime.now());
             return newsModel;
         }
 
@@ -66,7 +70,8 @@ public class ModelDtoMapper {
             newsModel.setId(request.getId());
             newsModel.setTitle(request.getTitle());
             newsModel.setContent(request.getContent());
-            newsModel.setAuthorId(request.getAuthorId());
+            newsModel.setCreateDate(LocalDateTime.now());
+            newsModel.setLastUpdateTime(LocalDateTime.now());
             return newsModel;
         }
     }
@@ -80,7 +85,8 @@ public class ModelDtoMapper {
             newsDtoResponse.setId(model.getId());
             newsDtoResponse.setContent(model.getContent());
             newsDtoResponse.setTitle(model.getTitle());
-            newsDtoResponse.setAuthorId(model.getAuthorId());
+            newsDtoResponse.setCreateDate(model.getCreateDate());
+            newsDtoResponse.setLastUpdateTime(model.getLastUpdateTime());
             return newsDtoResponse;
         }
     }
@@ -120,11 +126,12 @@ public class ModelDtoMapper {
     }
 
     @Component
-    public static class TagMapper implements com.mjc.school.service.mapper.TagMapper{
+    @Primary
+    public static class TagMapper implements com.mjc.school.service.mapper.TagMapper {
 
         @Override
         public TagDtoResponse tagModelToDto(TagModel tagModel) {
-            TagDtoResponse tagDtoResponse=new TagDtoResponse();
+            TagDtoResponse tagDtoResponse = new TagDtoResponse();
             tagDtoResponse.setId(tagModel.getId());
             tagDtoResponse.setName(tagModel.getName());
             return tagDtoResponse;
@@ -132,7 +139,7 @@ public class ModelDtoMapper {
 
         @Override
         public TagModel tagDtoToModel(TagDtoRequest tagDtoRequest) {
-            TagModel tagModel=new TagModel();
+            TagModel tagModel = new TagModel();
             tagModel.setId(tagDtoRequest.getId());
             tagModel.setName(tagDtoRequest.getName());
             return tagModel;

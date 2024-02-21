@@ -35,12 +35,15 @@ subprojects {
 
 
         implementation "org.springframework:spring-context:$springVersion"
-        implementation "org.mapstruct:mapstruct:1.5.3.Final"
+        implementation "org.mapstruct:mapstruct:1.5.4.Final"
         implementation "org.postgresql:postgresql:$postgresqlVersion"
         implementation "javax.xml.bind:jaxb-api:$javaxXmlBindVersion"
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.7'
         implementation 'org.springframework.boot:spring-boot-starter-web:2.7.7'
         implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.7'
+
+
+
         implementation 'com.h2database:h2:2.1.214'
 
 
@@ -51,6 +54,7 @@ subprojects {
         testImplementation "org.assertj:assertj-core:3.24.2"
         compileOnly 'org.projectlombok:lombok:1.18.30'
         annotationProcessor 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor "org.mapstruct:mapstruct-processor:1.5.4.Final"
     }
     test {
         useJUnitPlatform()
