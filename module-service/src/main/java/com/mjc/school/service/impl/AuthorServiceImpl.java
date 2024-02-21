@@ -12,6 +12,7 @@ import com.mjc.school.service.mapper.AuthorDtoRequestMapperToAuthorModel;
 import com.mjc.school.service.mapper.AuthorModelMapperToAuthorDtoResponse;
 import com.mjc.school.service.mapper.ModelDtoMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository repository;
     private final AuthorModelMapperToAuthorDtoResponse mapAuthorModelToAuthorDtoResponse;
     private final AuthorDtoRequestMapperToAuthorModel mapAuthorDtoRequestToAuthorModel;
+    @Autowired
     private final Validator validator;
 
 
