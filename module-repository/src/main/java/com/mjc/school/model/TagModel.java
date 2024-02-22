@@ -4,9 +4,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -23,7 +21,7 @@ public class TagModel implements BaseEntity<Long> {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    @Length(min=3, max=15)
+    @Length(min = 3, max = 15)
     @NonNull
     private String name;
 
