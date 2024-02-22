@@ -11,10 +11,8 @@ import java.util.List;
 @Repository
 public interface TagRepository extends JpaRepository<TagModel, Long> {
 
-    @Query("SELECT t FROM TagModel t JOIN FETCH t.newsModels n WHERE n.id = :newsId")
-    List<TagModel> findAllByNewsModelId(@Param("newsId") Long newsId);
-
-
+    @Query("SELECT t FROM TagModel t JOIN FETCH t.newsModelSet n WHERE n.id = :newsId")
+    List<TagModel> findAllByNewsModelId(@Param(value="newsId") Long newsId);
 
 }
 

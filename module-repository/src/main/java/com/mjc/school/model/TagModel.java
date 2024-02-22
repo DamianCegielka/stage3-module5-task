@@ -5,15 +5,17 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 //@Table(name = "TAGS")
 @Data
-@ToString(exclude = "newsModels")
-@EqualsAndHashCode(exclude = {"id", "newsModels"})
+@ToString(exclude = "newsModelSet")
+@EqualsAndHashCode(exclude = {"id", "newsModelSet"})
 public class TagModel implements BaseEntity<Long> {
 
     @Id
@@ -25,8 +27,8 @@ public class TagModel implements BaseEntity<Long> {
     @NonNull
     private String name;
 
-    @ManyToMany(mappedBy = "tagModels", cascade = {CascadeType.MERGE})
-    private List<NewsModel> newsModels = new ArrayList<>();
+    @ManyToMany(mappedBy = "tagModelSet", cascade = {CascadeType.MERGE})
+    private Set<NewsModel> newsModelSet = new HashSet<>();
 
     @Override
     public Long getId() {
@@ -39,3 +41,4 @@ public class TagModel implements BaseEntity<Long> {
     }
 
 }
+

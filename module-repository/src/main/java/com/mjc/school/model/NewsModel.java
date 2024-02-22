@@ -5,15 +5,17 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 //@Table(name = "NEWS")
 @Data
-@ToString(exclude = {"tagModels", "authorModel", "commentModelList"})
-@EqualsAndHashCode(exclude = {"id", "tagModels", "commentModelList"})
+@ToString(exclude = {"tagModelSet", "authorModel", "commentModelList"})
+@EqualsAndHashCode(exclude = {"id", "tagModelSet", "commentModelList"})
 public class NewsModel implements BaseEntity<Long> {
 
     @Id
@@ -51,5 +53,5 @@ public class NewsModel implements BaseEntity<Long> {
     @JoinTable(name = "NEWS_TAG",
             joinColumns = @JoinColumn(name = "news_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "ID"))
-    private List<TagModel> tagModels;
+    private Set<TagModel> tagModelSet = new HashSet<>();
 }

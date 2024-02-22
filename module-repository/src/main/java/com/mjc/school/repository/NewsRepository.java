@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface NewsRepository extends JpaRepository<NewsModel, Long> {
-    @Query("SELECT n FROM NewsModel n JOIN n.tagModels t WHERE t.name LIKE CONCAT('%', :tagName, '%')")
+    @Query("SELECT n FROM NewsModel n JOIN n.tagModelSet t WHERE t.name LIKE CONCAT('%', :tagName, '%')")
     List<NewsModel> findAllByTagModelName(@Param("tagName") String tagName);
-    @Query("SELECT n FROM NewsModel n JOIN n.tagModels t WHERE t.id LIKE CONCAT('%', :tagId, '%')")
+    @Query("SELECT n FROM NewsModel n JOIN n.tagModelSet t WHERE t.id LIKE CONCAT('%', :tagId, '%')")
     List<NewsModel> findAllByTagModelId(@Param("tagId") Long tagId);
     @Query("SELECT n FROM NewsModel n JOIN n.authorModel a WHERE a.name = :authorName")
     List<NewsModel> findAllByAuthorModelName(@Param(value = "authorName") String authorName);

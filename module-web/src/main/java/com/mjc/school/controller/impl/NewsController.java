@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
 import java.util.List;
+import java.util.Set;
 
 
 @RequiredArgsConstructor
@@ -108,6 +109,19 @@ public class NewsController implements BaseRestController<NewsDtoRequest, NewsDt
     )
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
+    }
+
+    @GetMapping("/by-various-parameters")
+    @ApiOperation(value = "View news compliant to various parameters", response = Set.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved news by various parameters"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+            @ApiResponse(code = 500, message = "Application failed to process the request")
+    })
+    public ResponseEntity<Set<NewsDtoResponse>> readNewsByVariousParameters(@RequestBody NewsDtoRequest newsRequestDto) {
+        return new ResponseEntity<>(service.readNewsByVariousParameters(newsRequestDto), HttpStatus.OK);
     }
 
 }
