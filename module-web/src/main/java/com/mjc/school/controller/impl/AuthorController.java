@@ -72,10 +72,11 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
     }
 
     @Override
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     @ApiOperation(value = "Update a piece of author information", response = AuthorDtoResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully updated author information"),
+            @ApiResponse(code = 400, message = "Illegal input for this model"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
@@ -91,7 +92,7 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "Deletes specific author with the supplied id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully deletes the specific news"),
+            @ApiResponse(code = 204, message = "Successfully deletes the specific news"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
@@ -103,10 +104,12 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
         service.deleteById(id);
     }
 
+
+
     @GetMapping("/by-news/{newsId}")
     @ApiOperation(value = "Retrieve specific author by news with the supplied id", response = AuthorDtoResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved the author by news with the supplied id"),
+            @ApiResponse(code = 200, message = "Successfully get author by news id"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),

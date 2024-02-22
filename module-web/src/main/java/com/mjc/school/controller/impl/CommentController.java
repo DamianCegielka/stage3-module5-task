@@ -75,10 +75,11 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
     }
 
     @Override
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     @ApiOperation(value = "Update a piece of comment information", response = CommentDtoResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully updated comment information"),
+            @ApiResponse(code = 400, message = "Illegal input for this model"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
@@ -94,7 +95,7 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "Deletes specific comment with the supplied id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully deletes the specific commnent"),
+            @ApiResponse(code = 204, message = "Successfully deletes the specific commnent"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
@@ -104,6 +105,5 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
     }
-
 
 }
