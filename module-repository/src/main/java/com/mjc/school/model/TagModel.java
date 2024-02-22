@@ -10,7 +10,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@Table(name = "TAGS")
 @Data
 @ToString(exclude = "newsModelSet")
 @EqualsAndHashCode(exclude = {"id", "newsModelSet"})

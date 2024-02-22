@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
@@ -61,7 +60,6 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
     public ResponseEntity<TagDtoResponse> readById(@Valid @PathVariable Long id) {
         return new ResponseEntity<>(service.readById(id), HttpStatus.OK);
     }
-
 
 
     @Override

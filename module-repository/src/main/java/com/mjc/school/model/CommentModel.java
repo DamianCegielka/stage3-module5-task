@@ -1,7 +1,6 @@
 package com.mjc.school.model;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,7 +8,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@Table(name = "COMMENT")
 @Data
 @ToString(exclude = {"newsModel"})
 @EqualsAndHashCode(exclude = {"id"})
@@ -19,14 +17,10 @@ public class CommentModel implements BaseEntity<Long> {
     private Long id;
 
     @NonNull
-    //@Column(nullable = false)
-    @Length(min = 3, max = 255)
     private String content;
 
-    //@Column(nullable = false)
     private LocalDateTime created;
 
-    //@Column(nullable = false)
     private LocalDateTime modified;
 
     @ManyToOne(cascade = {CascadeType.MERGE})

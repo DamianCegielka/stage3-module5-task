@@ -12,7 +12,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@Table(name = "NEWS")
 @Data
 @ToString(exclude = {"tagModelSet", "authorModel", "commentModelList"})
 @EqualsAndHashCode(exclude = {"id", "tagModelSet", "commentModelList"})
@@ -22,23 +21,15 @@ public class NewsModel implements BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //@Column(nullable = false, length = 30)
-    // @Length(min = 5, max = 30)
     @NonNull
     private String title;
 
-    // @Column(nullable = false)
-    //@Length(min = 5, max = 255)
     @NonNull
     private String content;
 
-    // @Column(nullable = false)
-    //@CreatedDate
     @NonNull
     private LocalDateTime createDate;
 
-    //@Column(nullable = false)
-    //@LastModifiedDate
     @NonNull
     private LocalDateTime lastUpdateTime;
 

@@ -5,17 +5,14 @@ import com.mjc.school.repository.TagRepository;
 import com.mjc.school.service.TagService;
 import com.mjc.school.service.dto.tag.TagDtoRequest;
 import com.mjc.school.service.dto.tag.TagDtoResponse;
-import com.mjc.school.service.exception.NewsDoesNotExistException;
 import com.mjc.school.service.exception.TagIsDoesNotExistException;
 import com.mjc.school.service.mapper.TagMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
