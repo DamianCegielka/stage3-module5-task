@@ -7,12 +7,9 @@ import com.mjc.school.service.Validator;
 import com.mjc.school.service.dto.author.AuthorDtoRequest;
 import com.mjc.school.service.dto.author.AuthorDtoResponse;
 import com.mjc.school.service.exception.AuthorIdDoesNotExistException;
-import com.mjc.school.service.exception.NewsDoesNotExistException;
 import com.mjc.school.service.mapper.AuthorDtoRequestMapperToAuthorModel;
 import com.mjc.school.service.mapper.AuthorModelMapperToAuthorDtoResponse;
-import com.mjc.school.service.mapper.ModelDtoMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -26,7 +23,6 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository repository;
     private final AuthorModelMapperToAuthorDtoResponse mapAuthorModelToAuthorDtoResponse;
     private final AuthorDtoRequestMapperToAuthorModel mapAuthorDtoRequestToAuthorModel;
-    @Autowired
     private final Validator validator;
 
 
@@ -45,7 +41,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
-        try{
+        try {
             validator.lengthBetween3And15Symbols(createRequest.getName());
             AuthorModel authorModel = mapAuthorDtoRequestToAuthorModel.map(createRequest);
             return mapAuthorModelToAuthorDtoResponse.map(repository.save(authorModel));
@@ -64,10 +60,10 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public boolean deleteById(Long id) {
-        try{
+        try {
             repository.deleteById(id);
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;

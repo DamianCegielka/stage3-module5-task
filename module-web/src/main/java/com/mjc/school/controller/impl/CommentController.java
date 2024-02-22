@@ -1,7 +1,6 @@
 package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseRestController;
-import com.mjc.school.model.CommentModel;
 import com.mjc.school.service.CommentService;
 import com.mjc.school.service.dto.comment.CommentDtoRequest;
 import com.mjc.school.service.dto.comment.CommentDtoResponse;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.validation.constraints.Min;
 import java.util.List;
