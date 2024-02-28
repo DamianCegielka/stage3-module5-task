@@ -76,7 +76,7 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
     @PatchMapping("/update/{id}")
     @ApiOperation(value = "Update a piece of comment information", response = CommentDtoResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully updated comment information"),
+            @ApiResponse(code = 202, message = "Successfully updated comment information"),
             @ApiResponse(code = 400, message = "Illegal input for this model"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
@@ -86,11 +86,12 @@ public class CommentController implements BaseRestController<CommentDtoRequest, 
     )
     public ResponseEntity<CommentDtoResponse> update(@PathVariable Long id,
                                                      @RequestBody CommentDtoRequest updateRequest) {
-        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.ACCEPTED);
     }
 
     @Override
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Deletes specific comment with the supplied id")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Successfully deletes the specific comment"),

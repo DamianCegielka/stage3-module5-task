@@ -111,17 +111,22 @@ public class ModelDtoMapper {
 
         @Override
         public CommentModel map(CommentDtoRequest commentDtoRequest) {
-            return null;
-        }
-
-        @Override
-        public CommentModel mapUpdate(CommentDtoRequest commentDtoRequest) {
             CommentModel commentModel = new CommentModel();
             commentModel.setId(commentModel.getId());
             commentModel.setContent(commentModel.getContent());
             commentModel.setCreated(commentDtoRequest.getCreated());
             commentModel.setModified(commentDtoRequest.getModified());
-            return null;
+            return commentModel;
+        }
+
+        @Override
+        public CommentModel mapUpdate(CommentDtoRequest commentDtoRequest) {
+            CommentModel commentModel = new CommentModel();
+            commentModel.setId(commentDtoRequest.getId());
+            commentModel.setContent(commentDtoRequest.getContent());
+            commentModel.setCreated(commentDtoRequest.getCreated());
+            commentModel.setModified(commentDtoRequest.getModified());
+            return commentModel;
         }
     }
 

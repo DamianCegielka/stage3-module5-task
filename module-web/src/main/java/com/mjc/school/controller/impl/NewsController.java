@@ -80,7 +80,7 @@ public class NewsController implements BaseRestController<NewsDtoRequest, NewsDt
     @PatchMapping("/update/{id}")
     @ApiOperation(value = "Update a piece of news information", response = NewsDtoResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully updated news information"),
+            @ApiResponse(code = 202, message = "Successfully updated news information"),
             @ApiResponse(code = 400, message = "Illegal input for this model"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
@@ -90,11 +90,12 @@ public class NewsController implements BaseRestController<NewsDtoRequest, NewsDt
     )
     public ResponseEntity<NewsDtoResponse> update(@PathVariable Long id,
                                                   @RequestBody NewsDtoRequest updateRequest) {
-        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.ACCEPTED);
     }
 
     @Override
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Deletes specific news with the supplied id")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Successfully deletes the specific news"),

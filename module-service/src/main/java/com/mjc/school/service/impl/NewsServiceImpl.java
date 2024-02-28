@@ -10,6 +10,7 @@ import com.mjc.school.service.exception.NewsDoesNotExistException;
 import com.mjc.school.service.mapper.NewsDtoRequestMapperToNewsModel;
 import com.mjc.school.service.mapper.NewsModelMapperToDtoResponse;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

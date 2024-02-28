@@ -82,7 +82,7 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
     @PatchMapping("/update/{id}")
     @ApiOperation(value = "Update a piece of tag information", response = TagDtoResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully updated tag information"),
+            @ApiResponse(code = 202, message = "Successfully updated tag information"),
             @ApiResponse(code = 400, message = "Illegal input for this model"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
@@ -93,11 +93,12 @@ public class TagController implements BaseRestController<TagDtoRequest, TagDtoRe
     public ResponseEntity<TagDtoResponse> update(@PathVariable Long id,
                                                  @Valid
                                                  @RequestBody TagDtoRequest updateRequest) {
-        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.ACCEPTED);
     }
 
     @Override
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Deletes specific tag with the supplied id")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Successfully deletes the specific tag"),

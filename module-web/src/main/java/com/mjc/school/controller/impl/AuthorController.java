@@ -18,7 +18,7 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/authors", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/author", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(produces = "application/json", value = "Operations for creating, updating, retrieving and deleting authors in the application")
 @RequiredArgsConstructor
 public class AuthorController implements BaseRestController<AuthorDtoRequest, AuthorDtoResponse, Long> {
@@ -68,7 +68,7 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
             @ApiResponse(code = 500, message = "Application failed to process the request")
     })
     public ResponseEntity<AuthorDtoResponse> create(@RequestBody AuthorDtoRequest createRequest) {
-        return new ResponseEntity<>(service.create(createRequest), HttpStatus.OK);
+        return new ResponseEntity<>(service.create(createRequest), HttpStatus.CREATED);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class AuthorController implements BaseRestController<AuthorDtoRequest, Au
     )
     public ResponseEntity<AuthorDtoResponse> update(@PathVariable Long id,
                                                     @RequestBody AuthorDtoRequest updateRequest) {
-        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(service.update(updateRequest), HttpStatus.ACCEPTED);
     }
 
     @Override
